@@ -144,7 +144,7 @@ module.exports = {
         'max-len': [1, { code: 120, ignoreComments: true, ignoreStrings: true }],
         'no-restricted-syntax': [2, 'WithStatement'],
         'camelcase': [1, { properties: 'never' }],
-        'object-curly-newline': [1, { minProperties: 6, multiline: true }],
+        'object-curly-newline': [1, { minProperties: 6, multiline: false, consistent: true }],
         'array-element-newline': [1, 'consistent'],
     },
     settings: {
