@@ -1,5 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
+/**
+INSTALL
+
+yarn add --dev eslint eslint-plugin-import \
+eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks \
+@typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+INSTALL VUE
+yarn add ---save-dev eslint-plugin-vue
+*/
 
 
 module.exports = {
@@ -8,12 +16,26 @@ module.exports = {
         es2020: true,
     },
     extends: [
+        'eslint:all',
+
+        /**
+        * Vue
+        */
+        // 'plugin:vue/vue3-recommended',
+
+        /**
+        * NextJS
+        */
+        // 'next',
+        // 'next/core-web-vitals',
+
         /**
         * React
         */
         'plugin:react/all',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/strict',
+
         /**
         * Imports
         */
@@ -21,17 +43,18 @@ module.exports = {
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:import/typescript',
+
         /**
         * TypeScript
         */
         'plugin:@typescript-eslint/recommended',
     ],
-    
+
+    // parser: "vue-eslint-parser", // VUE
     parser: '@typescript-eslint/parser', // TYPESCRIPT
-    
+
     parserOptions: {
         ecmaFeatures: { jsx: true },
-        ecmaVersion: 12,
         sourceType: 'module',
     },
     plugins: [
@@ -39,6 +62,7 @@ module.exports = {
         'jsx-a11y',
     ],
     rules: {
+
         /**
         * Imports
         */
@@ -48,17 +72,21 @@ module.exports = {
         'import/order': [
             1, {
                 'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-                'newlines-between': 'always',
+                'newlines-between': 'never',
                 'alphabetize': { order: 'asc', caseInsensitive: true },
             },
         ],
         'import/no-extraneous-dependencies': ['error', { 'devDependencies': ['**/*.test.*', '**/*.spec.*', '**/*.config.*'] }],
-        'import/no-unresolved': 0,
-        
+
+        /**
+        * Vue
+        */
+        // "vue/html-indent": [1, 4],
+
         /**
         * React
         */
-        'react/jsx-no-useless-fragment': 0,
+        'react/jsx-one-expression-per-line': 0,
         'react/forbid-component-props': 0,
         'react/jsx-no-literals': 0,
         'react/jsx-newline': 0,
@@ -67,11 +95,6 @@ module.exports = {
         'react/react-in-jsx-scope': 0,
         'react/require-default-props': 0,
         'react/destructuring-assignment': 0,
-        'react/no-this-in-sfc': 0,
-        'react/jsx-one-expression-per-line': 0,
-        'react-hooks/exhaustive-deps': 0,
-        'jsx-a11y/label-has-for': 0,
-        'jsx-a11y/anchor-is-valid': 0,
         'react/jsx-closing-bracket-location': 2,
         'react/jsx-no-bind': [2, { ignoreDOMComponents: true }],
         'react/function-component-definition': [2, { 'namedComponents': 'arrow-function' }],
@@ -82,21 +105,20 @@ module.exports = {
         'react/jsx-indent-props': [1, 4],
         'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
         'react/jsx-no-duplicate-props': [2, { ignoreCase: false }],
+
         'jsx-a11y/label-has-associated-control': 2,
+        'jsx-a11y/anchor-is-valid': 0,
 
         /**
         * TypeScript
         */
-        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-empty-interface': 0,
         '@typescript-eslint/no-shadow': 2,
         '@typescript-eslint/no-unused-vars': [1, { argsIgnorePattern: '^_' }],
-        '@typescript-eslint/no-empty-interface': 0,
 
         /**
         * JavaScript
         */
-        'new-cap': 0,
-        'no-underscore-dangle': [2, { 'allow': ['_q'] }],
         'capitalized-comments': 0,
         'multiline-comment-style': 0,
         'no-inline-comments': 0,
@@ -120,8 +142,6 @@ module.exports = {
         'no-undef': 0,
         'no-useless-constructor': 0,
         'no-unused-vars': 0,
-        'no-process-env': 0,
-        'no-negated-condition': 0,
         'func-style': 0,
         'arrow-body-style': 0,
         'multiline-ternary': [2, 'always-multiline'],
@@ -148,8 +168,7 @@ module.exports = {
         'array-element-newline': [1, 'consistent'],
     },
     settings: {
-        /** REACT */
-        'react': {
+        react: {
             pragma: 'React',
             fragment: 'Fragment',
             version: 'detect',
@@ -162,5 +181,11 @@ module.exports = {
         JSX: true,
     },
 
-    ignorePatterns: ['**/node_modules/**/*', '**/.next/**/*', '**/build/**/*', '**/.tmp/**/*', '**/.cache/**/*'],
+    ignorePatterns: [
+        '**/node_modules/**/*',
+        '**/.next/**/*',
+        '**/build/**/*',
+        '**/.tmp/**/*',
+        '**/.cache/**/*',
+    ],
 };
